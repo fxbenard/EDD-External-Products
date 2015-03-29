@@ -1,0 +1,56 @@
+# Copyright (C) 2015 Easy Digital Downloads - External Products
+# This file is distributed under the same license as the Easy Digital Downloads - External Products package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Easy Digital Downloads - External Products 1.0.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/edd-external-"
+"products\n"
+"POT-Creation-Date: 2015-03-29 21:13:13+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2015-03-29 23:28+0100\n"
+"Last-Translator: fxbenard | FxB <fx@fxbenard.com>\n"
+"Language-Team: fxbenard | FxB <fx@fxbenard.com>\n"
+"X-Generator: Poedit 1.7.5\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Language: fr_FR\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+
+#: edd-external-products.php:35
+msgid "External Product URL:"
+msgstr "URL du produit externe :"
+
+#: edd-external-products.php:38
+msgid ""
+"The external URL (including http://) to use for the purchase button. Leave "
+"blank for standard products."
+msgstr ""
+"L'URL externe (avec http(s)://) à utiliser pour le bouton d'achat. Laissez "
+"vide pour les produits standards."
+
+#: edd-external-products.php:89
+msgid "This download can only be purchased from %s"
+msgstr "Ce téléchargement ne peut être acheté que sur %s"
+
+#. Plugin Name of the plugin/theme
+msgid "Easy Digital Downloads - External Products"
+msgstr "Easy Digital Downloads - External Products"
+
+#. Description of the plugin/theme
+msgid ""
+"Add an \"external URL\" to your Download post to redirect the purchase "
+"button to a different site. Handy both for affiliate-based product lists and "
+"referencing projects that are hosted elsewhere."
+msgstr ""
+"Ajouter une URL « externe » à votre téléchargement pour rediriger le bouton "
+"d'achat vers un autre site. Très pratique pour les listes de produits axés "
+"sur l'affiliation et le référencement de projets qui sont hébergées ailleurs."
+
+#. Author of the plugin/theme
+msgid "WebDevStudios"
+msgstr "WebDevStudios"
+
+#. Author URI of the plugin/theme
+msgid "http://webdevstudios.com"
+msgstr "http://webdevstudios.com"
