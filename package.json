@@ -1,0 +1,64 @@
+{
+	"name": "edd-external-products",
+	"version": "1.1.0",
+	"description": "Add an 'external URL' to your Download post to redirect the purchase button to a different site. Handy both for affiliate-based product lists and referencing projects that are hosted elsewhere.",
+	"homepage": "https://fxbenard.com/",
+	"author": {
+		"name": "FX Bénard",
+		"email": "fx@fxbenard.com",
+		"url": "https://fxbenard.com/"
+	},
+	"contributors": [
+	{
+		"name": "FX Bénard",
+		"url": "fxbenard.com"
+	},
+	{
+		"name": "webdevstudios",
+		"url": "webdevstudios.com"
+	}
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/fxbenard/EDD-External-Products"
+	},
+	"bugs": {
+		"url": "https://fxbenard.com/contactez-moi",
+		"email": "fx@fxbenard.com"
+	},
+	"license": "GPLv2+",
+	"private": true,
+	"directories": {
+		"js": "",
+		"sass": "",
+		"css": "",
+		"build": "./build",
+		"languages": "./languages"
+	},
+	"pot": {
+		"type": "wp-plugin",
+		"textdomain": "edd-external-products",
+		"src": "edd-external-products.php",
+		"header": {
+			"bugs": "https://fxbenard.com/",
+			"team": "fxbenard <fx@fxbenard.com>",
+			"last_translator": "fxbenard <fx@fxbenard.com>"
+		}
+	},
+	"devDependencies": {
+		"grunt": "~0.4.5",
+		"grunt-checktextdomain": "~1.0.0",
+		"grunt-contrib-clean": "~0.5.0",
+		"grunt-contrib-compress": "~0.8.0",
+		"grunt-contrib-copy": "~0.5.0",
+		"grunt-exec": "~0.4.5",
+		"grunt-newer": "^1.1.0",
+		"grunt-phpcs": "^0.4.0",
+		"grunt-potomo": "~3.2.0",
+		"grunt-text-replace": "^0.4.0",
+		"grunt-wp-i18n": "~0.5.2",
+		"grunt-wp-readme-to-markdown": "^0.9.0",
+		"load-grunt-config": "0.16.0",
+		"load-grunt-tasks": "~0.3.0"
+	}
+}
