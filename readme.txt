@@ -7,11 +7,11 @@ Stable tag: 1.1.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Add an "external URL" to your Download post to redirect the purchase button to a different site. Handy both for affiliate-based product lists and referencing projects that are hosted elsewhere.
+Ajoute une "URL externe" à vos articles de Téléchargement pour rediriger le bouton d'achat vers un autre site. Pratique pour les listes de produits d'affiliation ou pour faire référence à des projets que vous n'hébergez pas.
 
 == Description ==
 
- List external products alongside ones you sell on your own site. The purchase button for external products will link directly to whatever URL you specify.
+Listez des produits externes avec ceux que vous vendez sur votre site. Le bouton d'achat pour les produits externes redirigera directement vers l'URL que vous avez spécifiée.
 
 
 = Support =
@@ -23,7 +23,7 @@ Ou directement par e-mail : fx@fxbenard.com.
 == Installation ==
 
 = Depuis votre site WordPress  =
-Direction Extension > Ajouter > Mettre une extension en ligne > Selectionner le fichier zip préalablement téléchargé > Installer maintenant et tada !
+Direction Extensions > Ajouter > Mettre une extension en ligne > Selectionner le fichier zip préalablement téléchargé > Installer maintenant et tada !
 
 = Installation manuelle =
 Extraire le fichier zip et déposez-le dans votre dossier wp-content/plugins/ de votre installation WordPress et activez-le depuis votre page extension.
