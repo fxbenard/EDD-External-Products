@@ -2,7 +2,7 @@
 ---
 # Checktextdomain and makepot task(s)
 'bumpit':
-- 'replace:readme_txt'
+- 'replace'
 - 'wp_readme_to_markdown'
 # Checktextdomain and makepot task(s)
 'build:i18n':
