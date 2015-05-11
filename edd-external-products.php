@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Easy Digital Downloads - External Products
-Plugin URL: http://easydigitaldownloads.com
+Plugin URL: https://fxbenard.com/traductions/external-products
 Description: Add an "external URL" to your Download post to redirect the purchase button to a different site. Handy both for affiliate-based product lists and referencing projects that are hosted elsewhere.
-Version: 1.0.0
-Author: WebDevStudios
-Author URI: http://webdevstudios.com
+ Version: 1.1.0
+Author: fxbenard, WebDevStudios
+Author URI: https://fxbenard.com
 Text Domain: edd-external-products
 Domain Path: languages
 */
