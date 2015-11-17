@@ -11,6 +11,8 @@ Adds a robust third-party product system to Easy Digital Downloads
 
 Adds a robust third-party product system to Easy Digital Downloads. When activated, adds new fields to the Download Prices meta box allowing you to specify redirect details.
 
+External Products is based on the extension of the same name by WebDevStudios.
+
 == Installation ==
 
 1. Unzip the downloaded zip file
