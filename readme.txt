@@ -3,7 +3,7 @@ Contributors: section214
 Tags: Easy Digital Downloads, EDD, external, third party, remote, redirect
 Requires at least: 3.0
 Tested up to: 4.1
-Stable tag: 1.0.0
+Stable tag: 1.1.0
 
 Adds a robust third-party product system to Easy Digital Downloads
 
@@ -24,6 +24,9 @@ External Products is based on the extension of the same name by WebDevStudios.
 None yet
 
 == Changelog ==
+= Version 1.1.0 =
+* Fixed: Missing activation class
+* Improved: Codebase cleanup
 
 = Version 1.0.0 =
 * Initial release
