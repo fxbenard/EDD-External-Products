@@ -1,0 +1,80 @@
+{
+  "name": "edd-external-products",
+  "version": "1.1.1",
+  "description": "Add an 'external URL' to your Download post to redirect the purchase button to a different site. Handy both for affiliate-based product lists and referencing projects that are hosted elsewhere.",
+  "homepage": "https://fxbenard.com/",
+  "slug": "Edd External Products",
+  "nicename": "Edd External Products",
+  "tags": "français, fxbenard, Divi",
+  "upto": "4.6.1",
+  "author": {
+    "name": "FX Bénard",
+    "email": "fx@fxbenard.com",
+    "url": "https://fxbenard.com/"
+  },
+  "contributors": [
+    {
+      "name": "FX Bénard",
+      "url": "fxbenard.com"
+    },
+    {
+      "name": "Jérome Sadler",
+      "url": "sadler-jerome.fr"
+    }
+  ],
+  "repository": {
+    "type": "",
+    "url": ""
+  },
+  "bugs": {
+    "url": "https://fxbenard.com/contactez-moi",
+    "email": "fx@fxbenard.com"
+  },
+  "license": "GPLv2+",
+  "private": true,
+  "directories": {
+    "js": "./assets/js",
+    "sass": "",
+    "css": "",
+    "build": "./build",
+    "languages": "./languages"
+  },
+  "pot": {
+    "type": "wp-plugin",
+    "textdomain": "edd-external-products",
+    "tdsource": "test1",
+    "src": "edd-external-products.php",
+    "header": {
+      "bugs": "https://fxbenard.com/",
+      "team": "fxbenard <fx@fxbenard.com>",
+      "last_translator": "fxbenard <fx@fxbenard.com>"
+    }
+  },
+  "constant": {
+    "TEST_1": "DIVI_FRENCH",
+    "TEST1": "DIVIFRENCH",
+    "TEST-1": "DIVI-FRENCH",
+    "Test-1": "Divi-French",
+    "test_1": "divi_french",
+    "test-1": "divi-french",
+    "test": "divi-french"
+  },
+  "devDependencies": {
+    "grunt": "*",
+    "grunt-checktextdomain": "*",
+    "grunt-contrib-clean": "*",
+    "grunt-contrib-compress": "*",
+    "grunt-contrib-copy": "*",
+    "grunt-contrib-rename": "*",
+    "grunt-exec": "*",
+    "grunt-newer": "*",
+    "grunt-notify": "*",
+    "grunt-potomo": "*",
+    "grunt-text-replace": "*",
+    "grunt-wp-css": "*",
+    "grunt-wp-i18n": "*",
+    "grunt-wp-readme-to-markdown": "*",
+    "load-grunt-config": "*",
+    "load-grunt-tasks": "*"
+  }
+}
