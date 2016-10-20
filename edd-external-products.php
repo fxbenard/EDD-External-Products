@@ -1,11 +1,13 @@
 <?php
-/*
+/**
  * Plugin Name: Easy Digital Downloads - External Products
  * Plugin URL: http://easydigitaldownloads.com
  * Description: Add an "external URL" to your Download post to redirect the purchase button to a different site. Handy both for affiliate-based product lists and referencing projects that are hosted elsewhere.
- * Version: 1.0.0
- * Author: WebDevStudios
- * Author URI: http://webdevstudios.com
+ * Version: 1.1.1
+ * Author: fxbenard, WebDevStudios
+ * Author URI: https://fxbenard.com
+ * Text Domain: edd-external-products
+ * Domain Path: languages
  */
 
 /**
@@ -20,10 +22,10 @@
 function edd_external_product_render_field( $post_id ) {
 	$edd_external_url = get_post_meta( $post_id, '_edd_external_url', true );
 ?>
-	<p><strong><?php _e( 'External Product URL:', 'edd-external-product' ); ?></strong></p>
+	<p><strong><?php esc_attr_e( 'External Product URL:', 'edd-external-products' ); ?></strong></p>
 	<label for="edd_external_url">
 		<input type="text" name="_edd_external_url" id="edd_external_url" value="<?php echo esc_attr( $edd_external_url ); ?>" size="80" placeholder="http://"/>
-		<br/><?php _e( 'The external URL (including http://) to use for the purchase button. Leave blank for standard products.', 'edd-external-product' ); ?>
+		<br/><?php esc_attr_e( 'The external URL (including http://) to use for the purchase button. Leave blank for standard products.', 'edd-external-products' ); ?>
 	</label>
 <?php
 }
@@ -58,7 +60,7 @@ add_filter( 'edd_metabox_fields_save', 'edd_external_product_save' );
 function edd_external_product_metabox_save( $new ) {
 
 	// Convert to raw URL to save into wp_postmeta table and return.
-	return esc_url_raw( $_POST[ '_edd_external_url' ] );
+	return esc_url_raw( $_POST['_edd_external_url'] );
 
 }
 add_filter( 'edd_metabox_save__edd_external_url', 'edd_external_product_metabox_save' );
@@ -76,7 +78,7 @@ function edd_external_product_pre_add_to_cart( $download_id ) {
 
 	// Prevent user trying to purchase download using EDD purchase query string.
 	if ( $edd_external_url ) {
-		wp_die( sprintf( __( 'This download can only be purchased from %s', 'edd-external-product' ), esc_url( $edd_external_url ) ), '', array( 'back_link' => true ) );
+		wp_die( sprintf( __( 'This download can only be purchased from %s', 'edd-external-products' ), esc_url( $edd_external_url ) ), '', array( 'back_link' => true ) );
 	}
 
 }
@@ -124,3 +126,13 @@ function edd_external_product_link( $purchase_form, $args ) {
 	return $purchase_form;
 }
 add_filter( 'edd_purchase_download_form', 'edd_external_product_link', 10, 2 );
+
+/**
+ * Internationalization
+ *
+ * @since 1.1.0
+ */
+function eddep_textdomain() {
+	load_plugin_textdomain( 'edd-external-products', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
+}
+add_action( 'plugins_loaded', 'eddep_textdomain' );
