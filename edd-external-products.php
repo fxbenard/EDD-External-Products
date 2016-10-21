@@ -1,138 +1,151 @@
 <?php
 /**
- * Plugin Name: Easy Digital Downloads - External Products
- * Plugin URL: http://easydigitaldownloads.com
- * Description: Add an "external URL" to your Download post to redirect the purchase button to a different site. Handy both for affiliate-based product lists and referencing projects that are hosted elsewhere.
- * Version: 1.1.1
- * Author: fxbenard, WebDevStudios
- * Author URI: https://fxbenard.com
- * Text Domain: edd-external-products
- * Domain Path: languages
+ * Plugin Name:     Easy Digital Downloads - External Products
+ * Plugin URI:      https://wordpress.org/plugins/easy-digital-downloads-external-products
+ * Description:     Adds a robust third-party product system to Easy Digital Downloads
+ * Version:         1.1.0
+ * Author:          Daniel J Griffiths
+ * Author URI:      http://section214.com
+ * Text Domain:     edd-external-products
+ *
+ * @package         EDD\ExternalProducts
+ * @author          Daniel J Griffiths <dgriffiths@section214.com>
+ * @copyright       Copyright (c) 2014, Daniel J Griffiths
  */
 
-/**
- * External Product URL Field.
- *
- * Adds field do the EDD Downloads meta box for specifying the "External Product URL".
- *
- * @since 1.0.0
- *
- * @param integer $post_id Download (Post) ID.
- */
-function edd_external_product_render_field( $post_id ) {
-	$edd_external_url = get_post_meta( $post_id, '_edd_external_url', true );
-?>
-	<p><strong><?php esc_attr_e( 'External Product URL:', 'edd-external-products' ); ?></strong></p>
-	<label for="edd_external_url">
-		<input type="text" name="_edd_external_url" id="edd_external_url" value="<?php echo esc_attr( $edd_external_url ); ?>" size="80" placeholder="http://"/>
-		<br/><?php esc_attr_e( 'The external URL (including http://) to use for the purchase button. Leave blank for standard products.', 'edd-external-products' ); ?>
-	</label>
-<?php
+
+// Exit if accessed directly
+if( ! defined( 'ABSPATH' ) ) {
+	exit;
 }
-add_action( 'edd_meta_box_fields', 'edd_external_product_render_field', 90 );
 
-/**
- * Add the _edd_external_url field to the list of saved product fields.
- *
- * @since  1.0.0
- *
- * @param  array $fields The default product fields list.
- * @return array         The updated product fields list.
- */
-function edd_external_product_save( $fields ) {
 
-	// Add our field.
-	$fields[] = '_edd_external_url';
+if( ! class_exists( 'EDD_External_Products' ) ) {
 
-	// Return the fields array.
-	return $fields;
-}
-add_filter( 'edd_metabox_fields_save', 'edd_external_product_save' );
 
-/**
- * Sanitize metabox field to only accept URLs.
- *
- * @since 1.0.0
- *
- * @param string $new New value.
- * @return string
- */
-function edd_external_product_metabox_save( $new ) {
+	/**
+	 * Main EDD_External_Products class
+	 *
+	 * @since       1.0.0
+	 */
+	class EDD_External_Products {
 
-	// Convert to raw URL to save into wp_postmeta table and return.
-	return esc_url_raw( $_POST['_edd_external_url'] );
 
-}
-add_filter( 'edd_metabox_save__edd_external_url', 'edd_external_product_metabox_save' );
+		/**
+		 * @var         EDD_External_Products $instance The one true EDD_External_Products
+		 * @since       1.0.0
+		 */
+		private static $instance;
 
-/**
- * Prevent a download linked to an external URL from being purchased with ?edd_action=add_to_cart&download_id=XXX.
- *
- * @since 1.0.0
- *
- * @param int $download_id Download ID.
- */
-function edd_external_product_pre_add_to_cart( $download_id ) {
 
-	$edd_external_url = get_post_meta( $download_id, '_edd_external_url', true ) ? get_post_meta( $download_id, '_edd_external_url', true ) : '';
+		/**
+		 * Get active instance
+		 *
+		 * @access      public
+		 * @since       1.0.0
+		 * @return      self::$instance The one true EDD_External_Products
+		 */
+		public static function instance() {
+			if( ! self::$instance ) {
+				self::$instance = new EDD_External_Products();
+				self::$instance->setup_constants();
+				self::$instance->load_textdomain();
+				self::$instance->includes();
+			}
 
-	// Prevent user trying to purchase download using EDD purchase query string.
-	if ( $edd_external_url ) {
-		wp_die( sprintf( __( 'This download can only be purchased from %s', 'edd-external-products' ), esc_url( $edd_external_url ) ), '', array( 'back_link' => true ) );
+			return self::$instance;
+		}
+
+
+		/**
+		 * Setup plugin constants
+		 *
+		 * @access      private
+		 * @since       1.0.0
+		 * @return      void
+		 */
+		private function setup_constants() {
+			// Plugin version
+			define( 'EDD_EXTERNAL_PRODUCTS_VER', '1.1.0' );
+
+			// Plugin path
+			define( 'EDD_EXTERNAL_PRODUCTS_DIR', plugin_dir_path( __FILE__ ) );
+
+			// Plugin URL
+			define( 'EDD_EXTERNAL_PRODUCTS_URL', plugin_dir_url( __FILE__ ) );
+		}
+
+
+		/**
+		 * Include required files
+		 *
+		 * @access      private
+		 * @since       1.1.0
+		 * @return      void
+		 */
+		private function includes() {
+			require_once EDD_EXTERNAL_PRODUCTS_DIR . 'includes/template-overrides.php';
+
+			if( is_admin() ) {
+				require_once EDD_EXTERNAL_PRODUCTS_DIR . 'includes/admin/downloads/meta-box.php';
+			}
+		}
+
+
+		/**
+		 * Internationalization
+		 *
+		 * @access      public
+		 * @since       1.0.0
+		 * @return      void
+		 */
+		public function load_textdomain() {
+			// Set filter for language directory
+			$lang_dir = dirname( plugin_basename( __FILE__ ) ) . '/languages/';
+			$lang_dir = apply_filters( 'edd_conditional_emails_lang_dir', $lang_dir );
+
+			// Traditional WordPress plugin locale filter
+			$locale = apply_filters( 'plugin_locale', get_locale(), '' );
+			$mofile = sprintf( '%1$s-%2$s.mo', 'edd-external-products', $locale );
+
+			// Setup paths to current locale file
+			$mofile_local   = $lang_dir . $mofile;
+			$mofile_global  = WP_LANG_DIR . '/edd-external-products/' . $mofile;
+
+			if( file_exists( $mofile_global ) ) {
+				// Look in global /wp-content/languages/edd-external-products/ folder
+				load_textdomain( 'edd-external-products', $mofile_global );
+			} elseif( file_exists( $mofile_local ) ) {
+				// Look in local /wp-content/plugins/edd-external-products/languages/ folder
+				load_textdomain( 'edd-external-products', $mofile_local );
+			} else {
+				// Load the default language files
+				load_plugin_textdomain( 'edd-external-products', false, $lang_dir );
+			}
+		}
 	}
-
 }
-add_action( 'edd_pre_add_to_cart', 'edd_external_product_pre_add_to_cart' );
+
 
 /**
- * Override the default product purchase button with an external anchor.
+ * The main function responsible for returning the one true EDD_External_Products
+ * instance to functions everywhere
  *
- * Only affects products that have an external URL stored.
- *
- * @since 1.0.0
- *
- * @param string $purchase_form The concatenated markup for the purchase area.
- * @param array  $args          Args passed from {@see edd_get_purchase_link()}.
- * @return string The potentially modified purchase area markup
+ * @since       1.0.0
+ * @return      EDD_External_Products The one true EDD_External_Products
  */
-function edd_external_product_link( $purchase_form, $args ) {
+function edd_external_products() {
+	if( ! class_exists( 'Easy_Digital_Downloads' ) ) {
+		if( ! class_exists( 'S214_EDD_Activation' ) ) {
+			require_once 'includes/libraries/class.s214-edd-activation.php';
+		}
 
-	// If the product has an external URL set.
-	$external_url = get_post_meta( $args['download_id'], '_edd_external_url', true );
-	if ( $external_url ) {
+		$activation = new S214_EDD_Activation( plugin_dir_path( __FILE__ ), basename( __FILE__ ) );
+		$activation = $activation->run();
 
-		// Open up the standard containers.
-		$output = '<div class="edd_download_purchase_form">';
-		$output .= '<div class="edd_purchase_submit_wrapper">';
-
-		// Output an anchor tag with the same classes as the product button.
-		$output .= sprintf(
-			'<a class="%1$s" href="%2$s" %3$s>%4$s</a>',
-			implode( ' ', array( $args['style'], $args['color'], trim( $args['class'] ) ) ),
-			esc_attr( $external_url ),
-			apply_filters( 'edd_external_product_link_attrs', '', $args ),
-			esc_attr( $args['text'] )
-		);
-
-		// Close the containers.
-		$output .= '</div><!-- .edd_purchase_submit_wrapper -->';
-		$output .= '</div><!-- .edd_download_purchase_form -->';
-
-		// Replace the form output with our own output.
-		$purchase_form = $output;
+		return EDD_External_Products::instance();
+	} else {
+		return EDD_External_Products::instance();
 	}
-
-	// Return the possibly modified purchase form.
-	return $purchase_form;
 }
-add_filter( 'edd_purchase_download_form', 'edd_external_product_link', 10, 2 );
-
-/**
- * Internationalization
- *
- * @since 1.1.0
- */
-function eddep_textdomain() {
-	load_plugin_textdomain( 'edd-external-products', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-}
-add_action( 'plugins_loaded', 'eddep_textdomain' );
+add_action( 'plugins_loaded', 'edd_external_products' );
